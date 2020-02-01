@@ -6,6 +6,20 @@ using static Enums;
 
 public class InputManager : MonoBehaviour
 {
+    /*public List<AudioClip> audioQueue = new List<AudioClip>();
+    int index = 0;*/
+    public AudioSource audioSource;
+
+    public AudioClip Do;
+    public AudioClip Re;
+    public AudioClip Mi;
+    public AudioClip Fa;
+    public AudioClip Sol;
+    public AudioClip La;
+    public AudioClip Si;
+
+    public GameObject GameUI;
+
     //red, oran, dzelt, zals, sky blue, zils, violets,
     void NoteOn(MidiChannel channel, int note, float velocity)
     {
@@ -19,24 +33,31 @@ public class InputManager : MonoBehaviour
         {
             case (int)NoteColors.Red:
                 print("Red");
+                audioSource.PlayOneShot(Do);
                 break;
             case (int)NoteColors.Orange:
                 print("Orange");
+                audioSource.PlayOneShot(Re);
                 break;
             case (int)NoteColors.Yellow:
                 print("Yellow");
+                audioSource.PlayOneShot(Mi);
                 break;
             case (int)NoteColors.Green:
                 print("Green");
+                audioSource.PlayOneShot(Fa);
                 break;
             case (int)NoteColors.SkyBlue:
                 print("SkyBlue");
+                audioSource.PlayOneShot(Sol);
                 break;
             case (int)NoteColors.Blue:
                 print("Blue");
+                audioSource.PlayOneShot(La);
                 break;
             case (int)NoteColors.purple:
                 print("purple");
+                audioSource.PlayOneShot(Si);
                 break;
             default:
                 print("No Enum");
