@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -127,22 +128,24 @@ public class LevelManager : MonoBehaviour
 
     void ShowCombo (GameObject stick)
     {
-
         randomCount = 0;
         randomCount = UnityEngine.Random.Range (0, 3);
-
-        for (int i = 0; i < 3; i++)
-        {
-            int randomColor = UnityEngine.Random.Range (0, 7);
-            if(!randomColors.Contains(randomColor)) {
-                randomColors.Add (randomColor);
-            }
-        }
-
         stick.GetComponent<RailController> ().stickCount = randomCount;
 
         if (!BtnUI.activeSelf)
         {
+
+            randomColors.Clear ();
+            for (int i = 0; i < 3; i++)
+            {
+                int randomColor = UnityEngine.Random.Range (0, 7);
+                if (!randomColors.Contains (randomColor))
+                {
+                    randomColors.Add (randomColor);
+                    ChangeComboColor (i, randomColor);
+                }
+            }
+            
             for (int i = 0; i < 3; i++)
             {
                 BtnUI.transform.GetChild (i).gameObject.SetActive (false);
@@ -162,8 +165,9 @@ public class LevelManager : MonoBehaviour
         BtnUI.SetActive (false);
     }
 
-    void ChangeComboImage ()
+    void ChangeComboColor (int id, int color)
     {
-
+        Image box = BtnUI.transform.GetChild (id).GetChild (0).GetComponent<Image> ();
+        box.color = colors[color];
     }
 }
