@@ -14,12 +14,12 @@ public class RailController : MonoBehaviour
     // Start is called before the first frame update
     void Start ()
     {
-        //BtnUI = GameObject.Find("GameUI");
-        //BtnUI = GameObject.Find("GameCanvas/GameUI");
-        //if (BtnUI)
-        //{
-        //    BtnUI.SetActive(false);
-        //}
+        BtnUI = GameObject.Find("GAME MANAGER").GetComponent<InputManager>().GameUI;
+
+        if (BtnUI)
+        {
+            BtnUI.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -46,27 +46,28 @@ public class RailController : MonoBehaviour
 
         if (other.tag == "SenceTrigger")
         {
-            //print("InactiveRail");
-            ////BtnUI
-            //if (!gameObject.GetComponent<RailController>().stick.activeSelf)
-            //{
-            //    BtnUI.SetActive(true);
+            print("InactiveRail");
+            //BtnUI
+            if (!gameObject.GetComponent<RailController>().stick.activeSelf)
+            {
+                BtnUI.SetActive(true);
 
-            //}
+            }
         }
 
         if (other.tag == "SenceTrigger")
         {
-            ////print("Nextrail");
-            ////BtnUI
-            //if (gameObject.GetComponent<RailController>().stick.activeSelf)
-            //{
-            //    BtnUI.SetActive(false);
-            //}
+            //print("Nextrail");
+            //BtnUI
+            if (gameObject.GetComponent<RailController>().stick.activeSelf)
+            {
+                BtnUI.SetActive(false);
+            }
         }
 
         //print("Nextrail222");
 
+        //game pause suff
         //if (!canShowStick)
         //{
         //    if (other.tag == "Front Trigger")

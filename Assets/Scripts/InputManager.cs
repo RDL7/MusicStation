@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
     public AudioClip La;
     public AudioClip Si;
 
+    public GameObject GameUI;
 
     //red, oran, dzelt, zals, sky blue, zils, violets,
     void NoteOn(MidiChannel channel, int note, float velocity)

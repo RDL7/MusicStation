@@ -628,9 +628,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelWrapper: {fileID: 1955966986}
+  playerObject: {fileID: 0}
   railPrefab: {fileID: 6946400974909338158, guid: 8faaa7112f9d74d3d8b94e3d589e1c0a,
     type: 3}
   railPool: []
+  railOrigin: []
   emptyRailPool: []
 --- !u!1 &469174231
 GameObject:
@@ -1123,6 +1125,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd9563a0c1302f438160f10a57b93ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  Do: {fileID: 0}
+  Re: {fileID: 0}
+  Mi: {fileID: 0}
+  Fa: {fileID: 0}
+  Sol: {fileID: 0}
+  La: {fileID: 0}
+  Si: {fileID: 0}
+  GameUI: {fileID: 967322639}
 --- !u!1 &967322639
 GameObject:
   m_ObjectHideFlags: 0
