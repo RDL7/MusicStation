@@ -884,6 +884,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 4158574382458220690, guid: b3279374d5ef04cd4992d346ea0e21d7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158574382458220691, guid: b3279374d5ef04cd4992d346ea0e21d7,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ac92174352cf726418992db79f507ba2,
+        type: 3}
+    - target: {fileID: 4158574382696238664, guid: b3279374d5ef04cd4992d346ea0e21d7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158574383155262689, guid: b3279374d5ef04cd4992d346ea0e21d7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -55
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3279374d5ef04cd4992d346ea0e21d7, type: 3}
 --- !u!1001 &5993982632136648368
