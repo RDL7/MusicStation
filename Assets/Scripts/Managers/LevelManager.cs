@@ -12,20 +12,24 @@ public class LevelManager : MonoBehaviour
     public GameObject railPrefab;
 
     public List<GameObject> railPool;
-    public List<GameObject> railOrigin;
+
     public List<GameObject> emptyRailPool;
-    
+
+    private GameObject BtnUI;
+    int randomCount = 0;
+
     void Start ()
-    { 
+    {
         EventManager.OnRailsLeave += RailLeave;
+        EventManager.OnShowCombo += ShowCombo;
 
         for (int i = 0; i < levelWrapper.transform.childCount; i++)
         {
             railPool.Add (levelWrapper.transform.GetChild (i).gameObject);
-            railOrigin.Add (levelWrapper.transform.GetChild (i).gameObject);
         }
 
         FirstStickCheck ();
+        BtnUI = InputManager.im.GameUI;
     }
 
     private void Update ()
@@ -36,7 +40,13 @@ public class LevelManager : MonoBehaviour
             {
                 emptyRailPool[0].GetComponent<RailController> ().canShowStick = true;
                 emptyRailPool.RemoveAt (0);
+                HideCombo ();
             }
+        }
+        if (emptyRailPool.Count > 0 && !BtnUI.activeSelf)
+        {
+            ShowCombo (emptyRailPool[0]);
+            print ("show combo");
         }
     }
 
@@ -47,16 +57,18 @@ public class LevelManager : MonoBehaviour
 
     void SpawnRail ()
     {
-        //Debug.Log ("Spawn Rail");
-
         GameObject stick = railPool[0].gameObject;
         stick.GetComponent<RailController> ().canShowStick = RandomiseSticks ();
 
         bool cantShow = stick.GetComponent<RailController> ().canShowStick;
 
-        if (!cantShow)
+        if (!cantShow && emptyRailPool.Count < 3)
         {
             emptyRailPool.Add (stick);
+        }
+        else
+        {
+            stick.GetComponent<RailController> ().canShowStick = true;
         }
 
         MovePostion ();
@@ -105,5 +117,34 @@ public class LevelManager : MonoBehaviour
                 emptyRailPool.Add (stick);
             }
         }
+    }
+
+    void ShowCombo (GameObject stick)
+    {
+
+        randomCount = 0;
+        randomCount = UnityEngine.Random.Range (0, 3);
+
+        stick.GetComponent<RailController> ().stickCount = randomCount;
+
+        if (!BtnUI.activeSelf)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                BtnUI.transform.GetChild (i).gameObject.SetActive (false);
+            }
+            for (int i = 0; i < randomCount; i++)
+            {
+                BtnUI.transform.GetChild (i).gameObject.SetActive (true);
+            }
+
+            BtnUI.SetActive (true);
+        }
+
+    }
+
+    void HideCombo ()
+    {
+        BtnUI.SetActive (false);
     }
 }

@@ -7,7 +7,11 @@ using static Enums;
 public class InputManager : MonoBehaviour
 {
     /*public List<AudioClip> audioQueue = new List<AudioClip>();
+
+    
     int index = 0;*/
+
+    public static InputManager im;
     public AudioSource audioSource;
 
     public AudioClip Do;
@@ -19,6 +23,14 @@ public class InputManager : MonoBehaviour
     public AudioClip Si;
 
     public GameObject GameUI;
+
+
+    private void Awake() {
+        if (im == null) 
+        {
+            im = this;
+        }
+    }
 
     //red, oran, dzelt, zals, sky blue, zils, violets,
     void NoteOn(MidiChannel channel, int note, float velocity)

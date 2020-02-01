@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4193474052201903397
 Transform:
   m_ObjectHideFlags: 0
@@ -103,15 +103,16 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -5328495346985171416, guid: d431108ffd57b499f84d1373cb4827eb,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.284, y: 0.916}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3198159661163799941
@@ -130,7 +131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8483377390453062919
 Transform:
   m_ObjectHideFlags: 0
@@ -292,9 +293,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23096412c8090461a827a84a49500306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stick: {fileID: 5344046856515177572}
   canShowStick: 1
   doOnce: 0
+  sticks:
+  - {fileID: 5344046856515177572}
+  - {fileID: 3198159661163799941}
+  - {fileID: 1316216841556148664}
+  stickCount: 0
 --- !u!1 &6946400976084749708
 GameObject:
   m_ObjectHideFlags: 0

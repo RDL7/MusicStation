@@ -20,6 +20,17 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    public delegate void OnShowComboDelegate (GameObject stick);
+    static public event OnShowComboDelegate OnShowCombo;
+
+    public void ShowCombo (GameObject stick)
+    {
+        if (OnShowCombo != null)
+        {
+            OnShowCombo (stick);
+        }
+    }
+
     // public delegate void OnCantShowStickDelegate ();
     // static public event OnCantShowStickDelegate OnCantShowStick;
 

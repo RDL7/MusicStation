@@ -5,35 +5,28 @@ using UnityEngine;
 public class RailController : MonoBehaviour
 {
 
-    public GameObject stick;
+    // public GameObject stick;
     public bool canShowStick = true;
     public bool doOnce = false;
 
-    GameObject BtnUI;
+    public GameObject[] sticks;
 
-    // Start is called before the first frame update
+    public int stickCount;
+
     void Start ()
     {
-        BtnUI = GameObject.Find("GAME MANAGER").GetComponent<InputManager>().GameUI;
 
-        if (BtnUI)
-        {
-            BtnUI.SetActive(false);
-        }
     }
 
-    // Update is called once per frame
     void Update ()
     {
-
         if (canShowStick)
         {
-
-            stick.SetActive (canShowStick);
+            sticks[stickCount].SetActive (canShowStick);
         }
         else
         {
-            stick.SetActive (canShowStick);
+            sticks[stickCount].SetActive (canShowStick);
         }
     }
 
@@ -41,40 +34,53 @@ public class RailController : MonoBehaviour
     {
         if (other.tag == "Back Trigger")
         {
-            EventManager.em.RailsLeave();
+            EventManager.em.RailsLeave ();
         }
 
         if (other.tag == "SenceTrigger")
         {
-            print("InactiveRail");
-            //BtnUI
-            if (!gameObject.GetComponent<RailController>().stick.activeSelf)
+            if (!canShowStick)
             {
-                BtnUI.SetActive(true);
-
+                EventManager.em.ShowCombo (gameObject);
             }
         }
 
-        if (other.tag == "SenceTrigger")
+        if (!canShowStick)
         {
-            //print("Nextrail");
-            //BtnUI
-            if (gameObject.GetComponent<RailController>().stick.activeSelf)
+            if (other.tag == "Front Trigger")
             {
-                BtnUI.SetActive(false);
+                //    Debug.Log (transform.name);
+                //    Time.timeScale = 0f;
             }
         }
-
-        //print("Nextrail222");
-
-        //game pause suff
-        //if (!canShowStick)
-        //{
-        //    if (other.tag == "Front Trigger")
-        //    {
-        //        Debug.Log (transform.name);
-        //        Time.timeScale = 0f;
-        //    }
-        //}
     }
+
+    private void OnTriggerStay2D (Collider2D other)
+    {
+        if (other.tag == "SenceTrigger")
+        {
+            
+        }
+    }
+
+    private void OnTriggerExit2D (Collider2D other)
+    {
+
+        if (other.tag == "SenceTrigger")
+        {
+            // BtnUI.SetActive (false);
+        }
+    }
+
+    // void RandomiseCombo ()
+    // {
+    //     randomCount = Random.Range (0, 3);
+
+    //     for (int i = 0; i < randomCount ; i++)
+    //     {
+    //         BtnUI.transform.GetChild(i).gameObject.SetActive(true);
+    //     }
+
+    //     // sticks[randomCount].SetActive (true);
+    // }
 }
