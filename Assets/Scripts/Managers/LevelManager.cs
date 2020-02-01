@@ -7,10 +7,14 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public GameObject levelWrapper;
-    public GameObject railPrefab;
-    public List<GameObject> railPool;
-    public List<GameObject> emptyRailPool;
 
+    public GameObject playerObject;
+    public GameObject railPrefab;
+
+    public List<GameObject> railPool;
+    public List<GameObject> railOrigin;
+    public List<GameObject> emptyRailPool;
+    
     void Start ()
     {
         EventManager.OnRailsLeave += RailLeave;
@@ -18,6 +22,7 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < levelWrapper.transform.childCount; i++)
         {
             railPool.Add (levelWrapper.transform.GetChild (i).gameObject);
+            railOrigin.Add (levelWrapper.transform.GetChild (i).gameObject);
         }
 
         FirstStickCheck ();
@@ -32,7 +37,6 @@ public class LevelManager : MonoBehaviour
                 emptyRailPool[0].GetComponent<RailController> ().canShowStick = true;
                 emptyRailPool.RemoveAt (0);
             }
-
         }
     }
 
@@ -69,7 +73,7 @@ public class LevelManager : MonoBehaviour
     public void MovePostion ()
     {
         Vector3 lastPosition = railPool[railPool.Count - 1].transform.position;
-        Vector3 _offset = new Vector3 (4.2f, 0f, 0f);
+        Vector3 _offset = new Vector3 (4.3f, 0f, 0f);
         railPool[0].transform.position = lastPosition + _offset;
     }
 

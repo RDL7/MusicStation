@@ -40,8 +40,8 @@ public class RailController : MonoBehaviour
         {
             if (other.tag == "Front Trigger")
             {
-                Debug.Log (transform.name);
-                Time.timeScale = 0f;
+                // Debug.Log (transform.name);
+                // Time.timeScale = 0f;
             }
         }
     }
