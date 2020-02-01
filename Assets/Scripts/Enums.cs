@@ -14,6 +14,6 @@ public class Enums : MonoBehaviour
         Green = 53,
         SkyBlue = 55,
         Blue = 57,
-        purple = 59
+        Purple = 59
     }
 }

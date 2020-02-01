@@ -12,11 +12,13 @@ public class LevelManager : MonoBehaviour
     public GameObject railPrefab;
 
     public List<GameObject> railPool;
-
     public List<GameObject> emptyRailPool;
+    public List<int> randomColors;
 
     private GameObject BtnUI;
-    int randomCount = 0;
+    private int randomCount = 0;
+
+    public Color[] colors;
 
     void Start ()
     {
@@ -34,6 +36,13 @@ public class LevelManager : MonoBehaviour
 
     private void Update ()
     {
+
+        if (emptyRailPool.Count > 0 && !BtnUI.activeSelf)
+        {
+            ShowCombo (emptyRailPool[0]);
+            print ("show combo");
+        }
+
         if (Input.GetKeyDown (KeyCode.Space))
         {
             if (emptyRailPool.Count > 0)
@@ -42,11 +51,7 @@ public class LevelManager : MonoBehaviour
                 emptyRailPool.RemoveAt (0);
                 HideCombo ();
             }
-        }
-        if (emptyRailPool.Count > 0 && !BtnUI.activeSelf)
-        {
-            ShowCombo (emptyRailPool[0]);
-            print ("show combo");
+            print ("show combo press");
         }
     }
 
@@ -111,11 +116,12 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < railPool.Count; i++)
         {
             GameObject stick = railPool[i].gameObject;
-            bool cantShow = stick.GetComponent<RailController> ().canShowStick;
-            if (!cantShow)
-            {
-                emptyRailPool.Add (stick);
-            }
+            // bool cantShow = stick.GetComponent<RailController> ().canShowStick;
+            // if (!cantShow)
+            // {
+            //     emptyRailPool.Add (stick);
+            // }
+            stick.GetComponent<RailController> ().stickCount = UnityEngine.Random.Range (0, 3);
         }
     }
 
@@ -125,6 +131,14 @@ public class LevelManager : MonoBehaviour
         randomCount = 0;
         randomCount = UnityEngine.Random.Range (0, 3);
 
+        for (int i = 0; i < 3; i++)
+        {
+            int randomColor = UnityEngine.Random.Range (0, 7);
+            if(!randomColors.Contains(randomColor)) {
+                randomColors.Add (randomColor);
+            }
+        }
+
         stick.GetComponent<RailController> ().stickCount = randomCount;
 
         if (!BtnUI.activeSelf)
@@ -133,7 +147,7 @@ public class LevelManager : MonoBehaviour
             {
                 BtnUI.transform.GetChild (i).gameObject.SetActive (false);
             }
-            for (int i = 0; i < randomCount; i++)
+            for (int i = 0; i <= randomCount; i++)
             {
                 BtnUI.transform.GetChild (i).gameObject.SetActive (true);
             }
@@ -146,5 +160,10 @@ public class LevelManager : MonoBehaviour
     void HideCombo ()
     {
         BtnUI.SetActive (false);
+    }
+
+    void ChangeComboImage ()
+    {
+
     }
 }

@@ -74,10 +74,10 @@ public class InputManager : MonoBehaviour
                 audioSource.PlayOneShot(La);
                 PressedKeys.Add((int)NoteColors.Blue);
                 break;
-            case (int)NoteColors.purple:
+            case (int)NoteColors.Purple:
                 print("purple");
                 audioSource.PlayOneShot(Si);
-                PressedKeys.Add((int)NoteColors.purple);
+                PressedKeys.Add((int)NoteColors.Purple);
                 break;
             default:
                 print("No Enum");

@@ -22,12 +22,26 @@ public class RailController : MonoBehaviour
     {
         if (canShowStick)
         {
-            sticks[stickCount].SetActive (canShowStick);
+            ShowSticks (stickCount);
         }
         else
         {
-            sticks[stickCount].SetActive (canShowStick);
+            HideSticks ();
         }
+    }
+
+    void HideSticks ()
+    {
+        for (int i = 0; i < sticks.Length; i++)
+        {
+            sticks[i].SetActive (false);
+        }
+    }
+
+    void ShowSticks (int count)
+    {
+        HideSticks ();
+        sticks[count].SetActive (true);
     }
 
     void OnTriggerEnter2D (Collider2D other)
@@ -59,7 +73,7 @@ public class RailController : MonoBehaviour
     {
         if (other.tag == "SenceTrigger")
         {
-            
+
         }
     }
 
