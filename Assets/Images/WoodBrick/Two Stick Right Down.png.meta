@@ -1,7 +1,16 @@
 fileFormatVersion: 2
-guid: 76db1ece54cd04d61862c52f88100ffb
+guid: fbf22bd435f7e4bf794f440e22a952aa
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 9162961308613411439
+    second: Two Stick Right Down_0
+  - first:
+      213: 7432331730140888607
+    second: Two Stick Right Down_1
+  - first:
+      213: 6023936845547039964
+    second: Two Stick Right Down_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -84,7 +93,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Two Stick Right Down_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 0
+        width: 343
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f620d8243c0692f70800000000000000
+      internalID: 9162961308613411439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Two Stick Right Down_1
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 155
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1e79e39452f42760800000000000000
+      internalID: 7432331730140888607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Two Stick Right Down_2
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 137
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdce73415a2599350800000000000000
+      internalID: 6023936845547039964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
