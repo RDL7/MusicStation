@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 468470817567022668}
   m_Layer: 0
   m_Name: Rails
-  m_TagString: Untagged
+  m_TagString: Rails
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stick: {fileID: 5344046856515177572}
   canShowStick: 1
+  doOnce: 0
 --- !u!1 &6946400976084749708
 GameObject:
   m_ObjectHideFlags: 0

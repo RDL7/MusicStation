@@ -8,10 +8,18 @@ public class RailController : MonoBehaviour
     public GameObject stick;
     public bool canShowStick = true;
     public bool doOnce = false;
+
+    GameObject BtnUI;
+
     // Start is called before the first frame update
     void Start ()
     {
-
+        //BtnUI = GameObject.Find("GameUI");
+        //BtnUI = GameObject.Find("GameCanvas/GameUI");
+        //if (BtnUI)
+        //{
+        //    BtnUI.SetActive(false);
+        //}
     }
 
     // Update is called once per frame
@@ -29,20 +37,43 @@ public class RailController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D (Collider2D other)
+    void OnTriggerEnter2D (Collider2D other)
     {
         if (other.tag == "Back Trigger")
         {
-            EventManager.em.RailsLeave ();
+            EventManager.em.RailsLeave();
         }
 
-        if (!canShowStick)
+        if (other.tag == "SenceTrigger")
         {
-            if (other.tag == "Front Trigger")
-            {
-                Debug.Log (transform.name);
-                Time.timeScale = 0f;
-            }
+            //print("InactiveRail");
+            ////BtnUI
+            //if (!gameObject.GetComponent<RailController>().stick.activeSelf)
+            //{
+            //    BtnUI.SetActive(true);
+
+            //}
         }
+
+        if (other.tag == "SenceTrigger")
+        {
+            ////print("Nextrail");
+            ////BtnUI
+            //if (gameObject.GetComponent<RailController>().stick.activeSelf)
+            //{
+            //    BtnUI.SetActive(false);
+            //}
+        }
+
+        //print("Nextrail222");
+
+        //if (!canShowStick)
+        //{
+        //    if (other.tag == "Front Trigger")
+        //    {
+        //        Debug.Log (transform.name);
+        //        Time.timeScale = 0f;
+        //    }
+        //}
     }
 }

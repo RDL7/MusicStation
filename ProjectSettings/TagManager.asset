@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Front Trigger
   - Back Trigger
+  - Rails
+  - SenceTrigger
   layers:
   - Default
   - TransparentFX

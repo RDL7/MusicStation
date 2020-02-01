@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> emptyRailPool;
 
     void Start ()
-    {
+    { 
         EventManager.OnRailsLeave += RailLeave;
 
         for (int i = 0; i < levelWrapper.transform.childCount; i++)
@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
 
     void SpawnRail ()
     {
-        Debug.Log ("Spawn Rail");
+        //Debug.Log ("Spawn Rail");
 
         GameObject stick = railPool[0].gameObject;
         stick.GetComponent<RailController> ().canShowStick = RandomiseSticks ();
