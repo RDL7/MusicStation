@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent (typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float movementSpeed = 1.0f;
+    private float moveSpeed = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.right * Time.deltaTime * movementSpeed;
+        moveSpeed = GameManager.instance.playerSpeed;
+
+        transform.position += Vector3.right * Time.deltaTime * moveSpeed;
     }
 }

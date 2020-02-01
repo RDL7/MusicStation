@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class GameState : State
 {
     public Canvas canvas;
-    
+    public GameObject pausePanel;
+
     void Start ()
     {
 
@@ -21,6 +22,7 @@ public class GameState : State
     public override void Enter (State from)
     {
         canvas.gameObject.SetActive (true);
+        GameManager.instance.playerSpeed = 1f;
     }
 
     public override void Exit (State from)
@@ -32,6 +34,11 @@ public class GameState : State
     public override void Tick ()
     {
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pausePanel.SetActive(true);
+            GameManager.instance.playerSpeed = 0;
+        }
     }
 
 }

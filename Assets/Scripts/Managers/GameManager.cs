@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     public float timeScale = 0;
 
+    public float playerSpeed = 0f;
+
     private void Awake ()
     {
         if (p_Instance == null)
