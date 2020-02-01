@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public bool isPaused = false;
 
+    public float timeScale = 0;
+
     private void Awake ()
     {
         if (p_Instance == null)
@@ -45,8 +47,12 @@ public class GameManager : MonoBehaviour
 
     void Update ()
     {
+        timeScale = Time.timeScale;
+
         m_StateManager.Tick ();
     }
+
+
 
     /* 
 Note: iOS applications are usually suspended and do not quit. 

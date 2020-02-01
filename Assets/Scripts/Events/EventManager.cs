@@ -20,6 +20,17 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    // public delegate void OnCantShowStickDelegate ();
+    // static public event OnCantShowStickDelegate OnCantShowStick;
+
+    // public void CantShowStick ()
+    // {
+    //     if (OnCantShowStick != null)
+    //     {
+    //         OnCantShowStick ();
+    //     }
+    // }
+
 }
 
 /*
