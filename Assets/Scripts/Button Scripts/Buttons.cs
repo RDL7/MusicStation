@@ -19,4 +19,10 @@ public class Buttons : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void LoadMenu()
+    {
+        //SceneManager.LoadScene();
+        Debug.Log("Menu loaded");
+    }
 }
