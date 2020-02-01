@@ -3,6 +3,8 @@ using MidiJack;
 
 public class test1 : MonoBehaviour
 {
+    public AudioSource audioSource;
+
     void NoteOn(MidiChannel channel, int note, float velocity)
     {
         Debug.Log("NoteOn: " + channel + "," + note + "," + velocity);
