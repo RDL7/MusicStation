@@ -26,51 +26,37 @@ public class GameState : State
     public override void Enter (State from)
     {
         isPaused = GameManager.instance.isPaused;
-        levelManager.RestartAll ();
+
         canvas.gameObject.SetActive (true);
         pausePanel.SetActive (false);
         comboPanel.SetActive (false);
         GameManager.instance.playerSpeed = 5f;
-
-        GameManager.instance.isPaused = false;
+        levelManager.RestartAll ();
     }
 
     public override void Exit (State from)
     {
         canvas.gameObject.SetActive (false);
         pausePanel.SetActive (false);
-        // comboPanel.SetActive (false);
-        // GameManager.instance.playerSpeed = 5f;
-        levelManager.RestartAll ();
-        // GameManager.instance.isPaused = false;
+
     }
 
-    // Update loop
     public override void Tick ()
     {
-
         if (Input.GetKeyDown (KeyCode.Escape))
         {
-            print ("escape");
             GamePause ();
         }
-
-        // if (isPaused)
-        // {
-        //     comboPanel.SetActive (false);
-        // }
     }
 
     public void GamePause ()
     {
-        // TODO: Cache player speed
         if (!isPaused)
         {
             isPaused = true;
 
             pausePanel.SetActive (true);
             GameManager.instance.playerSpeed = 0;
-
         }
         else if (isPaused)
         {
@@ -95,9 +81,7 @@ public class GameState : State
 
     public void GameQuit ()
     {
-        // GameManager.instance.stateManager.SwitchState("Menu");
         Application.Quit ();
-        Debug.Log ("Quit");
     }
 
     public void GameOverEvent ()

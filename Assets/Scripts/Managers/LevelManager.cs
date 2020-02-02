@@ -79,18 +79,6 @@ public class LevelManager : MonoBehaviour
         {
             HideCombo ();
         }
-
-        // if (Input.GetKeyDown (KeyCode.Space) && )
-        //if (Input.GetKeyDown (KeyCode.Space))
-        //{
-        //    if (emptyRailPool.Count > 0)
-        //    {
-        //        emptyRailPool[0].GetComponent<RailController> ().canShowStick = true;
-        //        emptyRailPool.RemoveAt (0);
-        //        HideCombo ();
-        //    }
-        //    print ("show combo press");
-        //}
     }
 
     void OnEnable ()
@@ -127,7 +115,7 @@ public class LevelManager : MonoBehaviour
                         {
                             emptyRailPool[0].GetComponent<RailController> ().ShowSticks ();
                             emptyRailPool.RemoveAt (0);
-                            // HideCombo ();
+                            HideCombo ();
                         }
                     }
                 }
@@ -218,9 +206,11 @@ public class LevelManager : MonoBehaviour
             GameObject stick = railPool[i].gameObject;
 
             bool cantShow = stick.GetComponent<RailController> ().canShowStick;
+
             if (!cantShow)
             {
-                stick.GetComponent<RailController> ().canShowStick = true;
+                stick.GetComponent<RailController> ().ShowSticks();
+
             }
             stick.GetComponent<RailController> ().stickCount = UnityEngine.Random.Range (0, 3);
         }
@@ -310,6 +300,7 @@ public class LevelManager : MonoBehaviour
     void HideCombo ()
     {
         BtnUI.SetActive (false);
+        showCombo = false;
     }
 
     void ChangeComboColor (int id, int color)
@@ -320,12 +311,12 @@ public class LevelManager : MonoBehaviour
 
     public void RestartAll ()
     {
-        
+
         railPool.Clear ();
         emptyRailPool.Clear ();
         randomColors.Clear ();
         showCombo = false;
-        
+
         for (int i = 0; i < levelWrapper.transform.childCount; i++)
         {
             railPool.Add (levelWrapper.transform.GetChild (i).gameObject);
@@ -335,6 +326,7 @@ public class LevelManager : MonoBehaviour
         {
             levelWrapper.transform.GetChild (i).transform.position = railPositions[i];
         }
+
         FirstStickCheck ();
         playerObject.transform.position = Vector3.zero;
     }

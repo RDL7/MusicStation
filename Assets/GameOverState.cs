@@ -31,4 +31,9 @@ public class GameOverState : State
 
     }
 
+    public void Restart() {
+        GameManager.instance.isPaused = false;
+        GameManager.instance.stateManager.SwitchState ("Game");
+    }
+
 }

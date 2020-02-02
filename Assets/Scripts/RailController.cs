@@ -12,6 +12,9 @@ public class RailController : MonoBehaviour
 
     public GameObject[] sticks;
     public Sprite[] houses;
+    public Sprite[] decors;
+
+    public GameObject[] decorObjects;    
 
     public int stickCount;
 
@@ -57,9 +60,15 @@ public class RailController : MonoBehaviour
     void ChangeHome ()
     {
         int randomHouse = UnityEngine.Random.Range (0, houses.Length);
+        int randomDecor = UnityEngine.Random.Range (0, decors.Length);
 
         transform.GetChild (transform.childCount - 2).GetComponent<SpriteRenderer> ().sprite = houses[randomHouse];
         transform.GetChild (transform.childCount - 1).GetComponent<SpriteRenderer> ().sprite = houses[randomHouse];
+
+        for (int i = 0; i < 2; i++)
+        {
+            decorObjects[i].GetComponent<SpriteRenderer> ().sprite = decors[randomDecor];
+        }
     }
 
     void OnTriggerEnter2D (Collider2D other)
