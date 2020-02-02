@@ -25,12 +25,13 @@ public class GameState : State
 
     public override void Enter (State from)
     {
+        isPaused = GameManager.instance.isPaused;
         levelManager.RestartAll ();
         canvas.gameObject.SetActive (true);
         pausePanel.SetActive (false);
         comboPanel.SetActive (false);
         GameManager.instance.playerSpeed = 5f;
-        
+
         GameManager.instance.isPaused = false;
     }
 
@@ -67,9 +68,9 @@ public class GameState : State
         {
             isPaused = true;
 
-                pausePanel.SetActive (true);
-                GameManager.instance.playerSpeed = 0;
-            
+            pausePanel.SetActive (true);
+            GameManager.instance.playerSpeed = 0;
+
         }
         else if (isPaused)
         {
@@ -88,6 +89,7 @@ public class GameState : State
 
     public void GameMenu ()
     {
+        GameManager.instance.isPaused = false;
         GameManager.instance.stateManager.SwitchState ("Menu");
     }
 
