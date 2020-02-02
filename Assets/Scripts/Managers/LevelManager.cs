@@ -82,7 +82,11 @@ public class LevelManager : MonoBehaviour
             {
                 if (note == (int)randomColors[i].ColorEnum)
                 {
+                    Image box = BtnUI.transform.GetChild(randomColors[i].BtnNumber).GetChild(0).GetComponent<Image>();
+                    box.color = new Color32(0, 0, 0, 255);
+
                     randomColors.RemoveAt(i);
+
                     if (randomColors.Count == 0)
                     {
                         //kad nospiez ko vajag
@@ -199,7 +203,8 @@ public class LevelManager : MonoBehaviour
                     randomColors.Add(new GenColorStructure
                     {
                         Color = randomColor,
-                        ColorEnum = ColorEnum
+                        ColorEnum = ColorEnum,
+                        BtnNumber = i
                     });
 
                     ChangeComboColor (i, randomColor);

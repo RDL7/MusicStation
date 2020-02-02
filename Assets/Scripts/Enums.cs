@@ -23,4 +23,5 @@ public class GenColorStructure
 {
     public int Color {get; set; }
     public NoteColors ColorEnum {get; set; }
+    public int BtnNumber { get; set; }
 }
