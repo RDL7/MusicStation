@@ -17,7 +17,7 @@ public class MenuState : State
     public override void Enter (State from)
     {
         canvas.gameObject.SetActive (true);
-        // levelManager.RestartAll ();
+        GameManager.instance.playerSpeed = 0f;
     }
 
     public override void Exit (State from)
@@ -33,8 +33,7 @@ public class MenuState : State
 
     public void StartGame ()
     {
-        print(GameManager.instance.stateManager.stateStack.Count);
-    GameManager.instance.stateManager.SwitchState ("Game");
-}
+        GameManager.instance.stateManager.SwitchState ("Game");
+    }
 
 }

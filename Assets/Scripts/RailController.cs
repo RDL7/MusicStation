@@ -49,7 +49,7 @@ public class RailController : MonoBehaviour
         {
             count = stickCount;
         }
-
+        canShowStick = true;
         HideSticks ();
         sticks[count].SetActive (true);
     }

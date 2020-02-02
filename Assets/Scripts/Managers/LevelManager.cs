@@ -16,13 +16,12 @@ public class LevelManager : MonoBehaviour
 
     public List<GameObject> railPool;
     public List<GameObject> emptyRailPool;
-    //public List<int> randomColors;
 
     private GameObject BtnUI;
     private int randomCount = 0;
 
     public Color[] colors;
-    public List<Vector3> railPositions = new List<Vector3>();
+    public List<Vector3> railPositions = new List<Vector3> ();
 
     //GenColorStructure MyGenColorStructure = new GenColorStructure();
 
@@ -67,20 +66,15 @@ public class LevelManager : MonoBehaviour
                 showCombo = true;
             }
         }
-
-        if (GameManager.instance.isPaused)
+        else if (GameManager.instance.isPaused && showCombo)
+        {
+            HideCombo ();
+        }
+        else if (!showCombo)
         {
             HideCombo ();
         }
 
-        if (!showCombo)
-        {
-            HideCombo ();
-        }
-        else if (showCombo && emptyRailPool.Count > 0)
-        {
-            ShowCombo (emptyRailPool[0]);
-        }
         // if (Input.GetKeyDown (KeyCode.Space) && )
         //if (Input.GetKeyDown (KeyCode.Space))
         //{
@@ -121,12 +115,11 @@ public class LevelManager : MonoBehaviour
 
                     if (randomColors.Count == 0)
                     {
-                        //kad nospiez ko vajag
                         if (emptyRailPool.Count > 0)
                         {
                             emptyRailPool[0].GetComponent<RailController> ().ShowSticks ();
                             emptyRailPool.RemoveAt (0);
-                            HideCombo ();
+                            // HideCombo ();
                         }
                     }
                 }
@@ -211,7 +204,7 @@ public class LevelManager : MonoBehaviour
             bool cantShow = stick.GetComponent<RailController> ().canShowStick;
             if (!cantShow)
             {
-                emptyRailPool.Add (stick);
+                stick.GetComponent<RailController> ().canShowStick = true;
             }
             stick.GetComponent<RailController> ().stickCount = UnityEngine.Random.Range (0, 3);
         }
@@ -243,7 +236,7 @@ public class LevelManager : MonoBehaviour
                 });
 
                 ChangeComboColor (i, randomColor);
-                //}
+
             }
 
             for (int i = 0; i < 3; i++)
@@ -311,12 +304,22 @@ public class LevelManager : MonoBehaviour
 
     public void RestartAll ()
     {
-        print (railPositions.Count + " 1");
+        
+        railPool.Clear ();
+        emptyRailPool.Clear ();
+        randomColors.Clear ();
+        showCombo = false;
+        
+        for (int i = 0; i < levelWrapper.transform.childCount; i++)
+        {
+            railPool.Add (levelWrapper.transform.GetChild (i).gameObject);
+        }
+
         for (int i = 0; i < levelWrapper.transform.childCount; i++)
         {
             levelWrapper.transform.GetChild (i).transform.position = railPositions[i];
         }
-
+        FirstStickCheck ();
         playerObject.transform.position = Vector3.zero;
     }
 }

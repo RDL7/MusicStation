@@ -73,13 +73,13 @@ Note: On WebGL it is not possible to implement OnApplicationQuit due to nature o
 
     void OnApplicationFocus (bool hasFocus)
     {
-        isPaused = !hasFocus;
+        // isPaused = !hasFocus;
         // Debug.LogWarning ("Game Focus");
     }
 
     void OnApplicationPause (bool pauseStatus)
     {
-        isPaused = pauseStatus;
+        // isPaused = pauseStatus;
         // Debug.LogWarning ("Game Pause");
     }
 }

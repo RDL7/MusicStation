@@ -14,7 +14,8 @@ public class GameState : State
 
     private bool isPaused = false;
 
-    private void Start() {
+    private void Start ()
+    {
         EventManager.OnGameOver += GameOverEvent;
     }
     public override string GetName ()
@@ -24,15 +25,23 @@ public class GameState : State
 
     public override void Enter (State from)
     {
+        levelManager.RestartAll ();
         canvas.gameObject.SetActive (true);
         pausePanel.SetActive (false);
+        comboPanel.SetActive (false);
         GameManager.instance.playerSpeed = 5f;
-        levelManager.RestartAll ();
+        
+        GameManager.instance.isPaused = false;
     }
 
     public override void Exit (State from)
     {
         canvas.gameObject.SetActive (false);
+        pausePanel.SetActive (false);
+        // comboPanel.SetActive (false);
+        // GameManager.instance.playerSpeed = 5f;
+        levelManager.RestartAll ();
+        // GameManager.instance.isPaused = false;
     }
 
     // Update loop
@@ -41,13 +50,14 @@ public class GameState : State
 
         if (Input.GetKeyDown (KeyCode.Escape))
         {
+            print ("escape");
             GamePause ();
         }
 
-        if (isPaused)
-        {
-            comboPanel.SetActive (false);
-        }
+        // if (isPaused)
+        // {
+        //     comboPanel.SetActive (false);
+        // }
     }
 
     public void GamePause ()
@@ -56,10 +66,12 @@ public class GameState : State
         if (!isPaused)
         {
             isPaused = true;
-            pausePanel.SetActive (true);
-            GameManager.instance.playerSpeed = 0;
+
+                pausePanel.SetActive (true);
+                GameManager.instance.playerSpeed = 0;
+            
         }
-        else
+        else if (isPaused)
         {
             isPaused = false;
             pausePanel.SetActive (false);
@@ -76,7 +88,6 @@ public class GameState : State
 
     public void GameMenu ()
     {
-        
         GameManager.instance.stateManager.SwitchState ("Menu");
     }
 

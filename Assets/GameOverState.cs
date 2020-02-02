@@ -17,7 +17,7 @@ public class GameOverState : State
     public override void Enter (State from)
     {
         canvas.gameObject.SetActive (true);
-
+        GameManager.instance.playerSpeed = 0f;
     }
 
     public override void Exit (State from)
