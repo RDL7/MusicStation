@@ -23,6 +23,8 @@ public class LevelManager : MonoBehaviour
     public Color[] colors;
     public List<Vector3> railPositions = new List<Vector3> ();
 
+    public float SpeedIncreseIfWrongNote;
+
     public GameManager MyGameManager;
     bool OkKey = false;
 
@@ -136,7 +138,7 @@ public class LevelManager : MonoBehaviour
         if (!OkKey)
         {
             //increase speed as  penalty
-            MyGameManager.playerSpeed += 0.15f;
+            MyGameManager.playerSpeed += SpeedIncreseIfWrongNote;
             //print("Speed: " + MyGameManager.playerSpeed);
         }
     }
