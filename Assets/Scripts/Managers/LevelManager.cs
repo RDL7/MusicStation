@@ -1,9 +1,11 @@
-﻿using System;
+﻿using MidiJack;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static Enums;
 
 public class LevelManager : MonoBehaviour
 {
@@ -14,12 +16,14 @@ public class LevelManager : MonoBehaviour
 
     public List<GameObject> railPool;
     public List<GameObject> emptyRailPool;
-    public List<int> randomColors;
+    //public List<int> randomColors;
 
     private GameObject BtnUI;
     private int randomCount = 0;
 
     public Color[] colors;
+    //GenColorStructure MyGenColorStructure = new GenColorStructure();
+    public List<GenColorStructure> randomColors = new List<GenColorStructure>();
 
     void Start ()
     {
@@ -33,6 +37,8 @@ public class LevelManager : MonoBehaviour
 
         FirstStickCheck ();
         BtnUI = InputManager.im.GameUI;
+
+
     }
 
     private void Update ()
@@ -44,19 +50,62 @@ public class LevelManager : MonoBehaviour
             print ("show combo");
         }
 
-        if (Input.GetKeyDown (KeyCode.Space))
-        {
-            if (emptyRailPool.Count > 0)
-            {
-                emptyRailPool[0].GetComponent<RailController> ().canShowStick = true;
-                emptyRailPool.RemoveAt (0);
-                HideCombo ();
-            }
-            print ("show combo press");
-        }
+        //if (Input.GetKeyDown (KeyCode.Space))
+        //{
+        //    if (emptyRailPool.Count > 0)
+        //    {
+        //        emptyRailPool[0].GetComponent<RailController> ().canShowStick = true;
+        //        emptyRailPool.RemoveAt (0);
+        //        HideCombo ();
+        //    }
+        //    print ("show combo press");
+        //}
     }
 
-    void RailLeave ()
+    void OnEnable()
+    {
+        MidiMaster.noteOnDelegate += NoteOn;
+    }
+
+    void OnDisable()
+    {
+        MidiMaster.noteOnDelegate -= NoteOn;
+    }
+
+    void NoteOn(MidiChannel channel, int note, float velocity)
+    {
+        //print("note: " + note + "Enum: "+  (int)randomColors[0].ColorEnum + (int)randomColors[1].ColorEnum  + (int)randomColors[2].ColorEnum);
+
+        for (int i = 0; i < randomColors.Count; i++)
+        {
+            if (randomColors[i] != null)
+            {
+                if (note == (int)randomColors[i].ColorEnum)
+                {
+                    //kad nospiez ko vajag
+                    if (emptyRailPool.Count > 0)
+                    {
+                        emptyRailPool[0].GetComponent<RailController>().canShowStick = true;
+                        emptyRailPool.RemoveAt(0);
+                        HideCombo();
+                    }
+                }
+            }
+        }
+
+        //    if (note == (int)randomColors[0].ColorEnum || note == (int)randomColors[1].ColorEnum || note == (int)randomColors[2].ColorEnum)
+        //{
+        //    if (emptyRailPool.Count > 0)
+        //    {
+        //        emptyRailPool[0].GetComponent<RailController>().canShowStick = true;
+        //        emptyRailPool.RemoveAt(0);
+        //        HideCombo();
+        //    }
+        //    print("show combo press");
+        //}
+    }
+
+        void RailLeave ()
     {
         SpawnRail ();
     }
@@ -134,16 +183,23 @@ public class LevelManager : MonoBehaviour
 
         if (!BtnUI.activeSelf)
         {
-
             randomColors.Clear ();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i <= randomCount; i++)
             {
                 int randomColor = UnityEngine.Random.Range (0, 7);
-                if (!randomColors.Contains (randomColor))
-                {
-                    randomColors.Add (randomColor);
+                NoteColors ColorEnum = GetEnumForColor(randomColor);
+
+                //if (!randomColors[i].Color.Contains(randomColor))
+                //{
+                    //randomColors.Add (new GenColorStructure randomColor);
+                    randomColors.Add(new GenColorStructure
+                    {
+                        Color = randomColor,
+                        ColorEnum = ColorEnum
+                    });
+
                     ChangeComboColor (i, randomColor);
-                }
+                //}
             }
             
             for (int i = 0; i < 3; i++)
@@ -158,6 +214,45 @@ public class LevelManager : MonoBehaviour
             BtnUI.SetActive (true);
         }
 
+    }
+
+    NoteColors GetEnumForColor(int RandomColor)
+    {
+        NoteColors ColorEnum = NoteColors.Red;
+
+        switch (RandomColor)
+        {
+            case 0:
+                ColorEnum = NoteColors.Red;
+                return ColorEnum;
+                break;
+            case 1:
+                ColorEnum = NoteColors.Orange;
+                return ColorEnum;
+                break;
+            case 2:
+                ColorEnum = NoteColors.Yellow;
+                return ColorEnum;
+                break;
+            case 3:
+                ColorEnum = NoteColors.Green;
+                return ColorEnum;
+                break;
+            case 4:
+                ColorEnum = NoteColors.SkyBlue;
+                return ColorEnum;
+                break;
+            case 5:
+                ColorEnum = NoteColors.Blue;
+                return ColorEnum;
+                break;
+            case 6:
+                ColorEnum = NoteColors.Purple;
+                return ColorEnum;
+                break;
+        }
+
+        return ColorEnum;
     }
 
     void HideCombo ()

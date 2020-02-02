@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Enums;
 
 public class Enums : MonoBehaviour
 {
@@ -16,4 +17,10 @@ public class Enums : MonoBehaviour
         Blue = 57,
         Purple = 59
     }
+}
+
+public class GenColorStructure
+{
+    public int Color {get; set; }
+    public NoteColors ColorEnum {get; set; }
 }
