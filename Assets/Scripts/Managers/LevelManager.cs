@@ -82,12 +82,16 @@ public class LevelManager : MonoBehaviour
             {
                 if (note == (int)randomColors[i].ColorEnum)
                 {
-                    //kad nospiez ko vajag
-                    if (emptyRailPool.Count > 0)
+                    randomColors.RemoveAt(i);
+                    if (randomColors.Count == 0)
                     {
-                        emptyRailPool[0].GetComponent<RailController>().canShowStick = true;
-                        emptyRailPool.RemoveAt(0);
-                        HideCombo();
+                        //kad nospiez ko vajag
+                        if (emptyRailPool.Count > 0)
+                        {
+                            emptyRailPool[0].GetComponent<RailController>().canShowStick = true;
+                            emptyRailPool.RemoveAt(0);
+                            HideCombo();
+                        }
                     }
                 }
             }
