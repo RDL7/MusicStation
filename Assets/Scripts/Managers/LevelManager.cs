@@ -23,6 +23,9 @@ public class LevelManager : MonoBehaviour
     public Color[] colors;
     public List<Vector3> railPositions = new List<Vector3> ();
 
+    public GameManager MyGameManager;
+    bool OkKey = false;
+
     //GenColorStructure MyGenColorStructure = new GenColorStructure();
 
     public List<GenColorStructure> randomColors = new List<GenColorStructure> ();
@@ -101,6 +104,7 @@ public class LevelManager : MonoBehaviour
     void NoteOn (MidiChannel channel, int note, float velocity)
     {
         //print("note: " + note + "Enum: "+  (int)randomColors[0].ColorEnum + (int)randomColors[1].ColorEnum  + (int)randomColors[2].ColorEnum);
+        OkKey = false;
 
         for (int i = 0; i < randomColors.Count; i++)
         {
@@ -112,6 +116,8 @@ public class LevelManager : MonoBehaviour
                     box.color = new Color32 (0, 0, 0, 255);
 
                     randomColors.RemoveAt (i);
+                    //bool Ok key true
+                    OkKey = true;
 
                     if (randomColors.Count == 0)
                     {
@@ -124,6 +130,14 @@ public class LevelManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        //increase speed if bool is false, that i set in if (note == (int) randomColors[i].ColorEnum) 
+        if (!OkKey)
+        {
+            //increase speed as  penalty
+            MyGameManager.playerSpeed += 0.15f;
+            //print("Speed: " + MyGameManager.playerSpeed);
         }
     }
 
