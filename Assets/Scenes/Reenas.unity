@@ -594,7 +594,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: 71fdc5529721247c0a63435a6a747a2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -621,7 +621,7 @@ Transform:
   - {fileID: 1202704466}
   - {fileID: 1856744957}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
 --- !u!114 &240194038
 MonoBehaviour:
@@ -750,7 +750,7 @@ RectTransform:
   - {fileID: 107699104}
   - {fileID: 71991397}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -770,7 +770,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 469174232}
+  levelManager: {fileID: 1955966988}
   pausePanel: {fileID: 107699105}
+  comboPanel: {fileID: 71991398}
 --- !u!4 &494442375 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6946400974909338159, guid: 8faaa7112f9d74d3d8b94e3d589e1c0a,
@@ -805,7 +807,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &555933715
 PrefabInstance:
@@ -931,7 +933,7 @@ Transform:
   m_Children:
   - {fileID: 1204875043}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &724351362
 GameObject:
@@ -1026,7 +1028,7 @@ RectTransform:
   m_Children:
   - {fileID: 1654480254}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1188,7 +1190,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &873296524
 MonoBehaviour:
@@ -1567,7 +1569,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1202704464
 GameObject:
@@ -1987,7 +1989,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1600515111
 GameObject:
@@ -2249,6 +2251,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1658256713}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1684191631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1684191632}
+  m_Layer: 0
+  m_Name: ------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1684191632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684191631}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1734914486
 GameObject:
   m_ObjectHideFlags: 0
@@ -2769,7 +2801,7 @@ Transform:
   - {fileID: 1944107078}
   - {fileID: 1131293159}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1955966988
 MonoBehaviour:
@@ -2789,7 +2821,6 @@ MonoBehaviour:
     type: 3}
   railPool: []
   emptyRailPool: []
-  randomColors: 
   colors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 1, g: 0.6324959, b: 0, a: 1}
@@ -2798,6 +2829,8 @@ MonoBehaviour:
   - {r: 0, g: 0.91796017, b: 1, a: 1}
   - {r: 0, g: 0.087194204, b: 1, a: 1}
   - {r: 0.8294525, g: 0, b: 1, a: 1}
+  railPositions: []
+  showCombo: 0
 --- !u!1 &2055829471
 GameObject:
   m_ObjectHideFlags: 0
@@ -2982,7 +3015,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6946400974854251944
 PrefabInstance:
