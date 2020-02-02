@@ -72,6 +72,7 @@ public class GameState : State
 
     public void GameMenu ()
     {
+        levelManager.RestartAll ();
         GameManager.instance.stateManager.SwitchState ("Menu");
     }
 

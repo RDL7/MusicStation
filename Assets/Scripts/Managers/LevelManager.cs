@@ -22,8 +22,10 @@ public class LevelManager : MonoBehaviour
     private int randomCount = 0;
 
     public Color[] colors;
-    public List<Vector3> railPositions;
+    public List<Vector3> railPositions = new List<Vector3>();
+
     //GenColorStructure MyGenColorStructure = new GenColorStructure();
+
     public List<GenColorStructure> randomColors = new List<GenColorStructure> ();
 
     public bool showCombo = false;
@@ -43,17 +45,16 @@ public class LevelManager : MonoBehaviour
             railPositions.Add (levelWrapper.transform.GetChild (i).position);
         }
 
+        print (railPositions.Count + " 0 ");
         FirstStickCheck ();
     }
 
     void Start ()
     {
-        print (levelWrapper.transform.childCount);
         EventManager.OnRailsLeave += RailLeave;
         EventManager.OnShowCombo += ShowCombo;
 
         BtnUI = InputManager.im.GameUI;
-
     }
 
     private void Update ()
@@ -76,7 +77,7 @@ public class LevelManager : MonoBehaviour
         {
             HideCombo ();
         }
-        else if( showCombo && emptyRailPool.Count > 0)
+        else if (showCombo && emptyRailPool.Count > 0)
         {
             ShowCombo (emptyRailPool[0]);
         }
@@ -207,11 +208,11 @@ public class LevelManager : MonoBehaviour
         {
             GameObject stick = railPool[i].gameObject;
 
-            // bool cantShow = stick.GetComponent<RailController> ().canShowStick;
-            // if (!cantShow)
-            // {
-            //     emptyRailPool.Add (stick);
-            // }
+            bool cantShow = stick.GetComponent<RailController> ().canShowStick;
+            if (!cantShow)
+            {
+                emptyRailPool.Add (stick);
+            }
             stick.GetComponent<RailController> ().stickCount = UnityEngine.Random.Range (0, 3);
         }
         ChangeOrder ();
@@ -310,6 +311,7 @@ public class LevelManager : MonoBehaviour
 
     public void RestartAll ()
     {
+        print (railPositions.Count + " 1");
         for (int i = 0; i < levelWrapper.transform.childCount; i++)
         {
             levelWrapper.transform.GetChild (i).transform.position = railPositions[i];

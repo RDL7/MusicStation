@@ -42,18 +42,12 @@ public class GameManager : MonoBehaviour
         //     m_StateManager.SwitchState (c_state);
     }
 
-    private void Start ()
-    {
-        // START
-    }
-
     void Update ()
     {
         timeScale = Time.timeScale;
 
         m_StateManager.Tick ();
     }
-
 
 
     /* 
