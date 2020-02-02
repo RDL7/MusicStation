@@ -7,11 +7,7 @@ using UnityEngine.UI;
 public class MenuState : State
 {
     public Canvas canvas;
-
-    void Start ()
-    {
-
-    }
+    public LevelManager levelManager;
 
     public override string GetName ()
     {
@@ -21,6 +17,7 @@ public class MenuState : State
     public override void Enter (State from)
     {
         canvas.gameObject.SetActive (true);
+        levelManager.RestartAll ();
     }
 
     public override void Exit (State from)
@@ -36,7 +33,7 @@ public class MenuState : State
 
     public void StartGame ()
     {
-        GameManager.instance.stateManager.SwitchState("Game");
+        GameManager.instance.stateManager.SwitchState ("Game");
     }
 
 }

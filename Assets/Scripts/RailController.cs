@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RailController : MonoBehaviour
 {
@@ -10,15 +11,13 @@ public class RailController : MonoBehaviour
     public bool doOnce = false;
 
     public GameObject[] sticks;
+    public Sprite[] houses;
 
     public int stickCount;
 
-    void Start ()
-    {
+    // int id = 0;
 
-    }
-
-    void Update ()
+    void OnEnable ()
     {
         if (canShowStick)
         {
@@ -28,6 +27,12 @@ public class RailController : MonoBehaviour
         {
             HideSticks ();
         }
+        ChangeHome ();
+    }
+
+    void Update ()
+    {
+
     }
 
     void HideSticks ()
@@ -38,10 +43,23 @@ public class RailController : MonoBehaviour
         }
     }
 
-    void ShowSticks (int count)
+    public void ShowSticks (int count = 10)
     {
+        if (count == 10)
+        {
+            count = stickCount;
+        }
+
         HideSticks ();
         sticks[count].SetActive (true);
+    }
+
+    void ChangeHome ()
+    {
+        int randomHouse = UnityEngine.Random.Range (0, houses.Length);
+
+        transform.GetChild (transform.childCount - 2).GetComponent<SpriteRenderer> ().sprite = houses[randomHouse];
+        transform.GetChild (transform.childCount - 1).GetComponent<SpriteRenderer> ().sprite = houses[randomHouse];
     }
 
     void OnTriggerEnter2D (Collider2D other)

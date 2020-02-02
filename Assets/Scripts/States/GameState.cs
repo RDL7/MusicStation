@@ -7,14 +7,12 @@ using UnityEngine.UI;
 public class GameState : State
 {
     public Canvas canvas;
+    public LevelManager levelManager;
+
     public GameObject pausePanel;
+    public GameObject comboPanel;
 
-    bool isPaused = false;
-
-    void Start ()
-    {
-
-    }
+    private bool isPaused = false;
 
     public override string GetName ()
     {
@@ -24,6 +22,7 @@ public class GameState : State
     public override void Enter (State from)
     {
         canvas.gameObject.SetActive (true);
+        pausePanel.SetActive (false);
         GameManager.instance.playerSpeed = 5f;
     }
 
@@ -40,6 +39,11 @@ public class GameState : State
         {
             GamePause ();
         }
+
+        if (isPaused)
+        {
+            comboPanel.SetActive (false);
+        }
     }
 
     public void GamePause ()
@@ -50,21 +54,32 @@ public class GameState : State
             isPaused = true;
             pausePanel.SetActive (true);
             GameManager.instance.playerSpeed = 0;
-        } else {
+        }
+        else
+        {
             isPaused = false;
             pausePanel.SetActive (false);
-            GameManager.instance.playerSpeed = 1;
+            GameManager.instance.playerSpeed = 5;
+
+            if (levelManager.showCombo)
+            {
+                comboPanel.SetActive (true);
+            }
         }
+
+        GameManager.instance.isPaused = isPaused;
     }
 
-    public void GameMenu() {
-        GameManager.instance.stateManager.SwitchState("Menu");
+    public void GameMenu ()
+    {
+        GameManager.instance.stateManager.SwitchState ("Menu");
     }
 
-    public void GameQuit() {
+    public void GameQuit ()
+    {
         // GameManager.instance.stateManager.SwitchState("Menu");
-        Application.Quit();
-        Debug.Log("Quit");
+        Application.Quit ();
+        Debug.Log ("Quit");
     }
 
 }

@@ -24,8 +24,8 @@ public class CameraManager : MonoBehaviour
         {
             float interpolation = speed * Time.deltaTime;
             Vector3 desiredPosition = target.transform.position + offset;
-            Vector3 smoothPosition = Vector3.Lerp (transform.position, desiredPosition, interpolation);
-            transform.position = smoothPosition;
+            // Vector3 smoothPosition = Vector3.Lerp (transform.position, desiredPosition, interpolation);
+            transform.position = desiredPosition;
         }
     }
 }
