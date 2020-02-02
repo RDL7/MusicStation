@@ -31,6 +31,17 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    public delegate void OnGameOverDelegate ();
+    static public event OnGameOverDelegate OnGameOver;
+
+    public void GameOverEvent ()
+    {
+        if (OnGameOver != null)
+        {
+            OnGameOver ();
+        }
+    }
+
     // public delegate void OnCantShowStickDelegate ();
     // static public event OnCantShowStickDelegate OnCantShowStick;
 

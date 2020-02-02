@@ -14,6 +14,9 @@ public class GameState : State
 
     private bool isPaused = false;
 
+    private void Start() {
+        EventManager.OnGameOver += GameOverEvent;
+    }
     public override string GetName ()
     {
         return "Game";
@@ -24,6 +27,7 @@ public class GameState : State
         canvas.gameObject.SetActive (true);
         pausePanel.SetActive (false);
         GameManager.instance.playerSpeed = 5f;
+        levelManager.RestartAll ();
     }
 
     public override void Exit (State from)
@@ -72,7 +76,7 @@ public class GameState : State
 
     public void GameMenu ()
     {
-        levelManager.RestartAll ();
+        
         GameManager.instance.stateManager.SwitchState ("Menu");
     }
 
@@ -81,6 +85,12 @@ public class GameState : State
         // GameManager.instance.stateManager.SwitchState("Menu");
         Application.Quit ();
         Debug.Log ("Quit");
+    }
+
+    public void GameOverEvent ()
+    {
+        GameManager.instance.playerSpeed = 0;
+        GameManager.instance.stateManager.SwitchState ("Game Over");
     }
 
 }
