@@ -25,3 +25,10 @@ public class GenColorStructure
     public NoteColors ColorEnum {get; set; }
     public int BtnNumber { get; set; }
 }
+
+public class GenColorStructureKeyboard
+{
+    public int Color {get; set; }
+    public KeyCode ColorEnum {get; set; }
+    public int BtnNumber { get; set; }
+}

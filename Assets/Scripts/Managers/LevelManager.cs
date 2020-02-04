@@ -6,6 +6,7 @@ using MidiJack;
 using UnityEngine;
 using UnityEngine.UI;
 using static Enums;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -28,9 +29,12 @@ public class LevelManager : MonoBehaviour
     public GameManager MyGameManager;
     bool OkKey = false;
 
+    KeyCode keyCode;
+
     //GenColorStructure MyGenColorStructure = new GenColorStructure();
 
     public List<GenColorStructure> randomColors = new List<GenColorStructure> ();
+    public List<GenColorStructureKeyboard> randomColorsKeyboard = new List<GenColorStructureKeyboard> ();
 
     public bool showCombo = false;
 
@@ -79,16 +83,36 @@ public class LevelManager : MonoBehaviour
         {
             HideCombo ();
         }
+
+    }
+
+    private void LateUpdate ()
+    {
+        PressKey ();
     }
 
     void OnEnable ()
     {
         MidiMaster.noteOnDelegate += NoteOn;
+        EventManager.OnPressKey += Note;
     }
 
     void OnDisable ()
     {
         MidiMaster.noteOnDelegate -= NoteOn;
+    }
+
+    void PressKey ()
+    {
+        foreach (KeyCode kcode in Enum.GetValues (typeof (KeyCode)))
+        {
+            if (Input.GetKeyDown (kcode))
+            {
+                keyCode = kcode;
+                Debug.Log ("KeyCode down: " + kcode);
+                EventManager.em.PressKey (keyCode);
+            }
+        }
     }
 
     void NoteOn (MidiChannel channel, int note, float velocity)
@@ -123,6 +147,45 @@ public class LevelManager : MonoBehaviour
         }
 
         //increase speed if bool is false, that i set in if (note == (int) randomColors[i].ColorEnum) 
+        if (!OkKey)
+        {
+            //increase speed as  penalty
+            MyGameManager.playerSpeed += SpeedIncreseIfWrongNote;
+            //print("Speed: " + MyGameManager.playerSpeed);
+        }
+    }
+
+    void Note (KeyCode keyCode)
+    {
+        print ("keyboard event");
+        OkKey = false;
+
+        for (int i = 0; i < randomColorsKeyboard.Count; i++)
+        {
+            if (randomColorsKeyboard[i] != null)
+            {
+                if (keyCode == randomColorsKeyboard[i].ColorEnum)
+                {
+                    Image box = BtnUI.transform.GetChild (randomColorsKeyboard[i].BtnNumber).GetChild (0).GetComponent<Image> ();
+                    box.color = new Color32 (0, 0, 0, 255);
+
+                    randomColorsKeyboard.RemoveAt (i);
+                    //bool Ok key true
+                    OkKey = true;
+
+                    if (randomColorsKeyboard.Count == 0)
+                    {
+                        if (emptyRailPool.Count > 0)
+                        {
+                            emptyRailPool[0].GetComponent<RailController> ().ShowSticks ();
+                            emptyRailPool.RemoveAt (0);
+                            HideCombo ();
+                        }
+                    }
+                }
+            }
+        }
+
         if (!OkKey)
         {
             //increase speed as  penalty
@@ -209,7 +272,7 @@ public class LevelManager : MonoBehaviour
 
             if (!cantShow)
             {
-                stick.GetComponent<RailController> ().ShowSticks();
+                stick.GetComponent<RailController> ().ShowSticks ();
 
             }
             stick.GetComponent<RailController> ().stickCount = UnityEngine.Random.Range (0, 3);
@@ -222,6 +285,7 @@ public class LevelManager : MonoBehaviour
         randomCount = 0;
         randomCount = UnityEngine.Random.Range (0, 3);
         stick.GetComponent<RailController> ().stickCount = randomCount;
+        stick.GetComponent<RailController> ().stickColors.Clear();
 
         if (!BtnUI.activeSelf)
         {
@@ -230,10 +294,8 @@ public class LevelManager : MonoBehaviour
             {
                 int randomColor = UnityEngine.Random.Range (0, 7);
                 NoteColors ColorEnum = GetEnumForColor (randomColor);
+                KeyCode ColorEnum2 = GetEnumForColorKeyboard (randomColor);
 
-                //if (!randomColors[i].Color.Contains(randomColor))
-                //{
-                //randomColors.Add (new GenColorStructure randomColor);
                 randomColors.Add (new GenColorStructure
                 {
                     Color = randomColor,
@@ -241,8 +303,15 @@ public class LevelManager : MonoBehaviour
                         BtnNumber = i
                 });
 
-                ChangeComboColor (i, randomColor);
+                randomColorsKeyboard.Add (new GenColorStructureKeyboard
+                {
+                    Color = randomColor,
+                        ColorEnum = ColorEnum2,
+                        BtnNumber = i
+                });
 
+                ChangeComboColor (i, randomColor, ColorEnum2);
+                stick.GetComponent<RailController> ().stickColors.Add(colors[randomColor]);
             }
 
             for (int i = 0; i < 3; i++)
@@ -297,15 +366,56 @@ public class LevelManager : MonoBehaviour
         return ColorEnum;
     }
 
+    KeyCode GetEnumForColorKeyboard (int RandomColor)
+    {
+        KeyCode ColorEnum = KeyCode.None;
+
+        switch (RandomColor)
+        {
+            case 0:
+                ColorEnum = KeyCode.Z;
+                return ColorEnum;
+                break;
+            case 1:
+                ColorEnum = KeyCode.X;
+                return ColorEnum;
+                break;
+            case 2:
+                ColorEnum = KeyCode.C;
+                return ColorEnum;
+                break;
+            case 3:
+                ColorEnum = KeyCode.V;
+                return ColorEnum;
+                break;
+            case 4:
+                ColorEnum = KeyCode.B;
+                return ColorEnum;
+                break;
+            case 5:
+                ColorEnum = KeyCode.N;
+                return ColorEnum;
+                break;
+            case 6:
+                ColorEnum = KeyCode.M;
+                return ColorEnum;
+                break;
+        }
+
+        return ColorEnum;
+    }
+
     void HideCombo ()
     {
         BtnUI.SetActive (false);
         showCombo = false;
     }
 
-    void ChangeComboColor (int id, int color)
+    void ChangeComboColor (int id, int color, KeyCode kCode )
     {
         Image box = BtnUI.transform.GetChild (id).GetChild (0).GetComponent<Image> ();
+        BtnUI.transform.GetChild (id).GetChild (0).GetChild(0).GetComponent<TextMeshProUGUI>().text = kCode.ToString();
+
         box.color = colors[color];
     }
 

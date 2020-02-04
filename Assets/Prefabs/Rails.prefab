@@ -884,6 +884,8 @@ MonoBehaviour:
   - {fileID: 5420217881397352643}
   - {fileID: 6308302058998962524}
   stickCount: 0
+  stickColors: []
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &6946400976084749708
 GameObject:
   m_ObjectHideFlags: 0

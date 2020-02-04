@@ -42,6 +42,17 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    public delegate void OnPressKeyDelegate (KeyCode keyCode);
+    static public event OnPressKeyDelegate OnPressKey;
+
+    public void PressKey (KeyCode keyCode)
+    {
+        if (OnPressKey != null)
+        {
+            OnPressKey (keyCode);
+        }
+    }
+
     // public delegate void OnCantShowStickDelegate ();
     // static public event OnCantShowStickDelegate OnCantShowStick;
 

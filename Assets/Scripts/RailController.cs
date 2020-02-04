@@ -14,10 +14,12 @@ public class RailController : MonoBehaviour
     public Sprite[] houses;
     public Sprite[] decors;
 
-    public GameObject[] decorObjects;    
+    public GameObject[] decorObjects;
 
     public int stickCount;
 
+    public List<Color> stickColors;
+    public Color baseColor;
     // int id = 0;
 
     void OnEnable ()
@@ -55,6 +57,22 @@ public class RailController : MonoBehaviour
         canShowStick = true;
         HideSticks ();
         sticks[count].SetActive (true);
+
+        if (stickColors.Count > 0)
+        {
+            for (int i = 0; i < sticks[count].transform.childCount; i++)
+            {
+                sticks[count].transform.GetChild (i).GetComponent<SpriteRenderer> ().color = stickColors[i];
+            }
+        }
+        else
+        {
+            for (int i = 0; i < sticks[count].transform.childCount; i++)
+            {
+                sticks[count].transform.GetChild (i).GetComponent<SpriteRenderer> ().color = baseColor;
+            }
+        }
+
     }
 
     void ChangeHome ()
